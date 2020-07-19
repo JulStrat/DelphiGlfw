@@ -17,6 +17,11 @@ Win64/
 *.dcu
 *.map
 *.deployproj
+
+#ignore FPC build files
+*.o
+*.ppu
+
 #ignore Delphi temp and backup files
 *.~*
 #ignore Delphi local files

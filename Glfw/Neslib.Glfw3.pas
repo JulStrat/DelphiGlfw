@@ -24,19 +24,23 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. }
 
+{$IFDEF FPC}
+{$MODE Delphi}
+{$ENDIF}
+
 {$MINENUMSIZE 4}
 
 interface
 
 uses
   {$IF Defined(MSWINDOWS)}
-  Winapi.Windows,
+  {$IFNDEF FPC}WinApi.Windows{$ELSE}Windows{$ENDIF},
   {$ELSEIF Defined(MACOS) and not Defined(IOS)}
   Macapi.CocoaTypes,
   {$ELSE}
     {$MESSAGE Error 'Unsupported platform'}
   {$ENDIF}
-  System.SysUtils;
+  {$IFNDEF FPC}System.SysUtils{$ELSE}SysUtils{$ENDIF};
 
 const
   {$IF Defined(WIN32)}
