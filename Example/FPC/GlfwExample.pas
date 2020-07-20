@@ -7,19 +7,21 @@ program GlfwExample;
 {$APPTYPE Console}
 
 uses
-  {$IFNDEF FPC}System.SysUtils{$ELSE}SysUtils{$ENDIF},
+  {$IFDEF FPC}
+  (* FPC *)
+  SysUtils,
+  {$IF Defined(MSWINDOWS) or Defined(Linux)}
+  gl, 
+  {$ENDIF}
+  {$ELSE}  
+  (* Delphi *)
+  System.SysUtils,
   {$IF Defined(MSWINDOWS)}
-  {$IFNDEF FPC}
-  Winapi.OpenGL, Winapi.OpenGLExt,
-  {$ELSE}
-  gl, glext,
-  {$ENDIF}
+  Winapi.OpenGL, 
   {$ELSEIF Defined(MACOS) and not Defined(IOS)}
-  Macapi.CocoaTypes,
-  Macapi.OpenGL,
-  {$ELSEIF Defined(Linux)}
-  gl, glext,
+  Macapi.CocoaTypes, Macapi.OpenGL,
   {$ENDIF}
+  {$ENDIF}  
   Neslib.Glfw3 in '..\..\Glfw\Neslib.Glfw3.pas';
 
 procedure ErrorCallback(error: Integer; const description: PAnsiChar); cdecl;
@@ -47,7 +49,7 @@ begin
   if (glfwInit = 0) then
     raise Exception.Create('Unable to initialize GLFW');
 
-  Window := glfwCreateWindow(640, 480, 'Simple example', nil, nil);
+  Window := glfwCreateWindow(640, 480, glfwGetVersionString(), nil, nil);
   if (Window = nil) then
   begin
     glfwTerminate;

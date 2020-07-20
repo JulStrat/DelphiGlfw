@@ -33,14 +33,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. }
 interface
 
 uses
+  {$IFDEF FPC}
+  (* FPC *) 
   {$IF Defined(MSWINDOWS)}
-  {$IFNDEF FPC}WinApi.Windows{$ELSE}Windows{$ENDIF},
-  {$ELSEIF Defined(MACOS) and not Defined(IOS)}
-  Macapi.CocoaTypes,
+  Windows,
   {$ELSEIF not Defined(Linux)}
     {$MESSAGE Error 'Unsupported platform'}
   {$ENDIF}
-  {$IFNDEF FPC}System.SysUtils{$ELSE}SysUtils{$ENDIF};
+  SysUtils;
+  {$ELSE}
+  (* Delphi *)
+  {$IF Defined(MSWINDOWS)}
+  WinApi.Windows,
+  {$ELSEIF Defined(MACOS) and not Defined(IOS)}
+  Macapi.CocoaTypes,
+  {$ELSE}
+    {$MESSAGE Error 'Unsupported platform'}
+  {$ENDIF}
+  System.SysUtils;
+  {$ENDIF}
 
 const
   {$IF Defined(WIN32)}
@@ -53,12 +64,12 @@ const
   GLFW3_LIB = 'glfw3_64.dll';
   { @exclude }
   _PU = '';
-  {$ELSEIF Defined(MACOS) and not Defined(IOS)}
+  {$ELSEIF Defined(MACOS) and not Defined(IOS) and not Defined(FPC)}
   { @exclude }
   GLFW3_LIB = 'libglfw.3.2.dylib';
   { @exclude }
   _PU = '_';
-  {$ELSEIF Defined(Linux)}
+  {$ELSEIF Defined(Linux) and Defined(FPC)}
   { @exclude }
   GLFW3_LIB = 'glfw';
   { @exclude }
@@ -110,14 +121,14 @@ const
 
     This is incremented when features are added to the API but it remains
     backward-compatible. }
-  GLFW_VERSION_MINOR = 2;
+  GLFW_VERSION_MINOR = 3;
 
 const
   { The revision number of the GLFW library.
 
     This is incremented when a bug fix release is made that does not contain any
     API changes. }
-  GLFW_VERSION_REVISION = 1;
+  GLFW_VERSION_REVISION = 2;
 
 const
   { One.
