@@ -4,7 +4,7 @@ program GlfwExample;
 {$MODE Delphi}
 {$ENDIF}
 
-{$APPTYPE GUI}
+{$APPTYPE Console}
 
 uses
   {$IFNDEF FPC}System.SysUtils{$ELSE}SysUtils{$ENDIF},
@@ -17,6 +17,8 @@ uses
   {$ELSEIF Defined(MACOS) and not Defined(IOS)}
   Macapi.CocoaTypes,
   Macapi.OpenGL,
+  {$ELSEIF Defined(Linux)}
+  gl, glext,
   {$ENDIF}
   Neslib.Glfw3 in '..\..\Glfw\Neslib.Glfw3.pas';
 

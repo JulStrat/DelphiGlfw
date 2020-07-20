@@ -37,7 +37,7 @@ uses
   {$IFNDEF FPC}WinApi.Windows{$ELSE}Windows{$ENDIF},
   {$ELSEIF Defined(MACOS) and not Defined(IOS)}
   Macapi.CocoaTypes,
-  {$ELSE}
+  {$ELSEIF not Defined(Linux)}
     {$MESSAGE Error 'Unsupported platform'}
   {$ENDIF}
   {$IFNDEF FPC}System.SysUtils{$ELSE}SysUtils{$ENDIF};
@@ -58,6 +58,11 @@ const
   GLFW3_LIB = 'libglfw.3.2.dylib';
   { @exclude }
   _PU = '_';
+  {$ELSEIF Defined(Linux)}
+  { @exclude }
+  GLFW3_LIB = 'glfw';
+  { @exclude }
+  _PU = '';  
   {$ELSE}
     {$MESSAGE Error 'Unsupported platform'}
   {$ENDIF}
