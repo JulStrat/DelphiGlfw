@@ -1,6 +1,6 @@
-# GLFW3 Language Bindings for Delphi
+# GLFW3 Language Bindings for Delphi/FPC
 
-This repository contains Delphi language bindings and binaries for [GLFW3](http://www.glfw.org/) version 3.2.1.
+This repository contains Delphi/FPC language bindings and binaries for [GLFW3](http://www.glfw.org/) version 3.3.2.
 
 It supports Windows (32-bit and 64-bit) and macOS (32-bit).
 
@@ -12,13 +12,15 @@ The only unit you need is `Neslib.Glfw3`, which contains the header translations
 
 The `Example` directory contains a minimal example of using GLFW and OpenGL to show a spinning triangle.
 
+<img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/example.png">
+
 ## Deployment
 
 This repository contains pre-compiled dynamic libraries for Windows and macOS. These can be found in the `Libraries` folder.
 
 To deploy your GLFW3 application:
 * For Windows: place the `glfw3_32.dll` (32-bit) or `glfw3_64.dll` (64-bit) file in the same directory as the executable.
-* For macOS: add the file `libglfw.3.2.dylib` to the Delphi Deployment Manager and set the Remote Path to `Contents\MacOS\`
+* For macOS: add the file `libglfw.3.dylib` to the Delphi Deployment Manager and set the Remote Path to `Contents\MacOS\`
 
 ## Documentation
 

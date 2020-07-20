@@ -66,7 +66,7 @@ const
   _PU = '';
   {$ELSEIF Defined(MACOS) and not Defined(IOS) and not Defined(FPC)}
   { @exclude }
-  GLFW3_LIB = 'libglfw.3.2.dylib';
+  GLFW3_LIB = 'libglfw.3.dylib';
   { @exclude }
   _PU = '_';
   {$ELSEIF Defined(Linux) and Defined(FPC)}
