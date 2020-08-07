@@ -62,7 +62,7 @@ begin
 
   while (glfwWindowShouldClose(Window) = 0) do
   begin
-    glfwGetFramebufferSize(Window, @width, @height);
+    glfwGetFramebufferSize(Window, @Width, @Height);
     Ratio := Width / Height;
     glViewport(0, 0, Width, Height);
     glClear(GL_COLOR_BUFFER_BIT);

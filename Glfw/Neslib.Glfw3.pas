@@ -1,5 +1,5 @@
 unit Neslib.Glfw3;
-{ GLFW3 language bindings for Delphi }
+{ GLFW3 language bindings for Delphi/FPC }
 
 { Copyright (c) 2016 by Erik van Bilsen
   All rights reserved.
@@ -23,6 +23,10 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. }
+
+{ Free Pascal compiler support for Neslib.Glfw3  
+  Copyright (c) 2020 I. Kakoulidis
+  All rights reserved. }
 
 {$IFDEF FPC}
 {$MODE Delphi}
@@ -78,6 +82,96 @@ const
     {$MESSAGE Error 'Unsupported platform'}
   {$ENDIF}
 
+(* 3.3.2 New Constant
+*)
+    GLFW_NO_ERROR = 1;
+    //GLFW_JOYSTICK_HAT_BUTTONS = 1;
+    //GLFW_COCOA_CHDIR_RESOURCES = 1;
+    //GLFW_COCOA_MENUBAR = 1;
+    
+	//GLFW_CENTER_CURSOR = 1;
+    //GLFW_TRANSPARENT_FRAMEBUFFER = 1;
+    //GLFW_HOVERED = 1;
+    //GLFW_FOCUS_ON_SHOW = 1;
+    
+	//GLFW_SCALE_TO_MONITOR = 1;
+    //GLFW_COCOA_RETINA_FRAMEBUFFER = 1;
+    //GLFW_COCOA_FRAME_NAME = 1;
+    //GLFW_COCOA_GRAPHICS_SWITCHING = 1;
+    //GLFW_X11_CLASS_NAME = 1;
+    //GLFW_X11_INSTANCE_NAME = 1;
+    //GLFW_OSMESA_CONTEXT_API = 1;
+	
+    //GLFW_HAT_CENTERED = 1;
+    //GLFW_HAT_UP = 1;
+    //GLFW_HAT_RIGHT = 1;
+    //GLFW_HAT_DOWN = 1;
+    //GLFW_HAT_LEFT = 1;
+    //GLFW_HAT_RIGHT_UP = 1;
+    //GLFW_HAT_RIGHT_DOWN = 1;
+    //GLFW_HAT_LEFT_UP = 1;
+    //GLFW_HAT_LEFT_DOWN = 1;
+    //GLFW_MOD_CAPS_LOCK = 1;
+    //GLFW_MOD_NUM_LOCK = 1;
+
+    //GLFW_LOCK_KEY_MODS = 1;
+    //GLFW_RAW_MOUSE_MOTION = 1;
+
+    //GLFW_GAMEPAD_BUTTON_A = 1;
+    //GLFW_GAMEPAD_BUTTON_B = 1;
+    //GLFW_GAMEPAD_BUTTON_X = 1;
+    //GLFW_GAMEPAD_BUTTON_Y = 1;
+    //GLFW_GAMEPAD_BUTTON_LEFT_BUMPER = 1;
+    //GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER = 1;
+    //GLFW_GAMEPAD_BUTTON_BACK = 1;
+    //GLFW_GAMEPAD_BUTTON_START = 1;
+    //GLFW_GAMEPAD_BUTTON_GUIDE = 1;
+    //GLFW_GAMEPAD_BUTTON_LEFT_THUMB = 1;
+    //GLFW_GAMEPAD_BUTTON_RIGHT_THUMB = 1;
+    //GLFW_GAMEPAD_BUTTON_DPAD_UP = 1;
+    //GLFW_GAMEPAD_BUTTON_DPAD_RIGHT = 1;
+    //GLFW_GAMEPAD_BUTTON_DPAD_DOWN = 1;
+    //GLFW_GAMEPAD_BUTTON_DPAD_LEFT = 1;
+    //GLFW_GAMEPAD_BUTTON_LAST = 1;
+    //GLFW_GAMEPAD_BUTTON_CROSS = 1;
+    //GLFW_GAMEPAD_BUTTON_CIRCLE = 1;
+    //GLFW_GAMEPAD_BUTTON_SQUARE = 1;
+    //GLFW_GAMEPAD_BUTTON_TRIANGLE = 1;
+	
+    //GLFW_GAMEPAD_AXIS_LEFT_X = 1;
+    //GLFW_GAMEPAD_AXIS_LEFT_Y = 1;
+    //GLFW_GAMEPAD_AXIS_RIGHT_X = 1;
+    //GLFW_GAMEPAD_AXIS_RIGHT_Y = 1;
+    //GLFW_GAMEPAD_AXIS_LEFT_TRIGGER = 1;
+    //GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER = 1;
+    //GLFW_GAMEPAD_AXIS_LAST = 1;
+(**)
+(* 3.3.2 New Functions
+    glfwInitHint
+    +glfwGetError
+    +glfwGetMonitorWorkarea
+    glfwGetMonitorContentScale
+    glfwGetMonitorUserPointer
+    glfwSetMonitorUserPointer
+    glfwWindowHintString
+    glfwGetWindowContentScale
+    glfwGetWindowOpacity
+    glfwSetWindowOpacity
+    glfwRequestWindowAttention
+    glfwSetWindowAttrib
+    glfwSetWindowMaximizeCallback
+    glfwSetWindowContentScaleCallback
+    glfwRawMouseMotionSupported
+    glfwGetKeyScancode
+    glfwGetJoystickHats
+    glfwGetJoystickGUID
+    glfwGetJoystickUserPointer
+    glfwSetJoystickUserPointer
+    glfwJoystickIsGamepad
+    glfwUpdateGamepadMappings
+    glfwGetGamepadName
+    glfwGetGamepadState
+*)
 {$REGION 'glfw3.h'}
 {*************************************************************************
  * GLFW 3.2 - www.glfw.org
@@ -157,6 +251,26 @@ const
 const
   { The key was held down until it repeated. }
   GLFW_REPEAT = 2;
+
+{*  3.3.2 @defgroup hat_state Joystick hat states
+ *  @brief Joystick hat states.
+ *
+ *  See [joystick hat input](@ref joystick_hat) for how these are used.
+ *
+ *  @ingroup input
+*}
+
+const
+
+  GLFW_HAT_CENTERED = 0;
+  GLFW_HAT_UP = 1;
+  GLFW_HAT_RIGHT = 2;
+  GLFW_HAT_DOWN = 4;
+  GLFW_HAT_LEFT = 8;
+  GLFW_HAT_RIGHT_UP = GLFW_HAT_RIGHT or GLFW_HAT_UP;
+  GLFW_HAT_RIGHT_DOWN = GLFW_HAT_RIGHT or GLFW_HAT_DOWN;
+  GLFW_HAT_LEFT_UP = GLFW_HAT_LEFT or GLFW_HAT_UP;
+  GLFW_HAT_LEFT_DOWN = GLFW_HAT_LEFT or GLFW_HAT_DOWN;
 
 const
   { The unknown key }
@@ -305,6 +419,22 @@ const
 const
   { If this bit is set one or more Super keys were held down. }
   GLFW_MOD_SUPER = $0008;
+  
+{*  3.3.2 @brief If this bit is set the Caps Lock key is enabled.
+ *
+ *  If this bit is set the Caps Lock key is enabled and the @ref
+ *  GLFW_LOCK_KEY_MODS input mode is set.
+ *}
+const 
+  GLFW_MOD_CAPS_LOCK = $0010;
+  
+{* 3.3.2 @brief If this bit is set the Num Lock key is enabled.
+ *
+ *  If this bit is set the Num Lock key is enabled and the @ref
+ *  GLFW_LOCK_KEY_MODS input mode is set.
+ *}
+const 
+  GLFW_MOD_NUM_LOCK = $0020;
 
 const
   { Mouse buttons }
@@ -340,6 +470,55 @@ const
   GLFW_JOYSTICK_15 = 14;
   GLFW_JOYSTICK_16 = 15;
   GLFW_JOYSTICK_LAST = GLFW_JOYSTICK_16;
+
+(* 3.3.2 @defgroup gamepad_buttons Gamepad buttons
+ *  @brief Gamepad buttons.
+ *
+ *  See @ref gamepad for how these are used.
+ *
+ *  @ingroup input
+ *  @{ */
+*) 
+const 
+  GLFW_GAMEPAD_BUTTON_A = 0;
+  GLFW_GAMEPAD_BUTTON_B = 1;
+  GLFW_GAMEPAD_BUTTON_X = 2;
+  GLFW_GAMEPAD_BUTTON_Y = 3;
+  GLFW_GAMEPAD_BUTTON_LEFT_BUMPER = 4;
+  GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER = 5;
+  GLFW_GAMEPAD_BUTTON_BACK = 6;
+  GLFW_GAMEPAD_BUTTON_START = 7;
+  GLFW_GAMEPAD_BUTTON_GUIDE = 8;
+  GLFW_GAMEPAD_BUTTON_LEFT_THUMB = 9;
+  GLFW_GAMEPAD_BUTTON_RIGHT_THUMB = 10;
+  GLFW_GAMEPAD_BUTTON_DPAD_UP = 11;
+  GLFW_GAMEPAD_BUTTON_DPAD_RIGHT = 12;
+  GLFW_GAMEPAD_BUTTON_DPAD_DOWN = 13;
+  GLFW_GAMEPAD_BUTTON_DPAD_LEFT = 14;
+  GLFW_GAMEPAD_BUTTON_LAST = GLFW_GAMEPAD_BUTTON_DPAD_LEFT;
+
+  GLFW_GAMEPAD_BUTTON_CROSS = GLFW_GAMEPAD_BUTTON_A;
+  GLFW_GAMEPAD_BUTTON_CIRCLE = GLFW_GAMEPAD_BUTTON_B;
+  GLFW_GAMEPAD_BUTTON_SQUARE = GLFW_GAMEPAD_BUTTON_X;
+  GLFW_GAMEPAD_BUTTON_TRIANGLE = GLFW_GAMEPAD_BUTTON_Y;
+(**)
+
+(*! @defgroup gamepad_axes Gamepad axes
+ *  @brief Gamepad axes.
+ *
+ *  See @ref gamepad for how these are used.
+ *
+ *  @ingroup input
+ *  @{ *)
+const 
+  GLFW_GAMEPAD_AXIS_LEFT_X = 0;
+  GLFW_GAMEPAD_AXIS_LEFT_Y = 1;
+  GLFW_GAMEPAD_AXIS_RIGHT_X = 2;
+  GLFW_GAMEPAD_AXIS_RIGHT_Y = 3;
+  GLFW_GAMEPAD_AXIS_LEFT_TRIGGER = 4;
+  GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER = 5;
+  GLFW_GAMEPAD_AXIS_LAST = GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER;
+(*! @} *)
 
 { Error codes }
 
@@ -468,6 +647,37 @@ const
   GLFW_AUTO_ICONIFY = $00020006;
   GLFW_FLOATING = $00020007;
   GLFW_MAXIMIZED = $00020008;
+  
+(*! @brief Cursor centering window hint
+ *
+ *  Cursor centering [window hint](@ref GLFW_CENTER_CURSOR_hint).
+ *)
+const 
+  GLFW_CENTER_CURSOR = $00020009;
+
+(*! @brief Window framebuffer transparency hint and attribute
+ *
+ *  Window framebuffer transparency
+ *  [window hint](@ref GLFW_TRANSPARENT_FRAMEBUFFER_hint) and
+ *  [window attribute](@ref GLFW_TRANSPARENT_FRAMEBUFFER_attrib).
+ *)
+const 
+  GLFW_TRANSPARENT_FRAMEBUFFER = $0002000A;
+  
+(*! @brief Mouse cursor hover window attribute.
+ *
+ *  Mouse cursor hover [window attribute](@ref GLFW_HOVERED_attrib).
+ *)
+const 
+  GLFW_HOVERED = $0002000B;
+
+(*! @brief Input focus on calling show window hint and attribute
+ *
+ *  Input focus [window hint](@ref GLFW_FOCUS_ON_SHOW_hint) or
+ *  [window attribute](@ref GLFW_FOCUS_ON_SHOW_attrib).
+ *)
+  GLFW_FOCUS_ON_SHOW = $0002000C;
+(**)  
 
   GLFW_RED_BITS = $00021001;
   GLFW_GREEN_BITS = $00021002;
@@ -498,6 +708,37 @@ const
   GLFW_CONTEXT_NO_ERROR = $0002200A;
   GLFW_CONTEXT_CREATION_API = $0002200B;
 
+(*! @brief Window content area scaling window
+ *  [window hint](@ref GLFW_SCALE_TO_MONITOR).
+ *)
+  GLFW_SCALE_TO_MONITOR = $0002200C;
+
+(*! @brief macOS specific
+ *  [window hint](@ref GLFW_COCOA_RETINA_FRAMEBUFFER_hint).
+ *)
+  GLFW_COCOA_RETINA_FRAMEBUFFER = $00023001;
+
+(*! @brief macOS specific
+ *  [window hint](@ref GLFW_COCOA_FRAME_NAME_hint).
+ *)
+  GLFW_COCOA_FRAME_NAME = $00023002;
+
+(*! @brief macOS specific
+ *  [window hint](@ref GLFW_COCOA_GRAPHICS_SWITCHING_hint).
+ *)
+  GLFW_COCOA_GRAPHICS_SWITCHING = $00023003;
+
+(*! @brief X11 specific
+ *  [window hint](@ref GLFW_X11_CLASS_NAME_hint).
+ *)
+  GLFW_X11_CLASS_NAME = $00024001;
+
+(*! @brief X11 specific
+ *  [window hint](@ref GLFW_X11_CLASS_NAME_hint).
+ *)
+  GLFW_X11_INSTANCE_NAME = $00024002;
+(* *)
+
   GLFW_NO_API = 0;
   GLFW_OPENGL_API = $00030001;
   GLFW_OPENGL_ES_API = $00030002;
@@ -513,7 +754,12 @@ const
   GLFW_CURSOR = $00033001;
   GLFW_STICKY_KEYS = $00033002;
   GLFW_STICKY_MOUSE_BUTTONS = $00033003;
-
+ 
+  (* 3.3.2 *) 
+  GLFW_LOCK_KEY_MODS = $00033004;
+  GLFW_RAW_MOUSE_MOTION = $00033005;
+  (* *) 
+  
   GLFW_CURSOR_NORMAL = $00034001;
   GLFW_CURSOR_HIDDEN = $00034002;
   GLFW_CURSOR_DISABLED = $00034003;
@@ -524,6 +770,8 @@ const
 
   GLFW_NATIVE_CONTEXT_API = $00036001;
   GLFW_EGL_CONTEXT_API = $00036002;
+
+  GLFW_OSMESA_CONTEXT_API = $00036003;
 
 { Standard cursor shapes }
 
@@ -554,6 +802,30 @@ const
 const
   GLFW_CONNECTED = $00040001;
   GLFW_DISCONNECTED = $00040002;
+
+(*! @addtogroup init
+ *  @{ */
+/*! @brief Joystick hat buttons init hint.
+ *
+ *  Joystick hat buttons [init hint](@ref GLFW_JOYSTICK_HAT_BUTTONS).
+ *)
+const 
+  GLFW_JOYSTICK_HAT_BUTTONS = $00050001;
+
+(*! @brief macOS specific init hint.
+ *
+ *  macOS specific [init hint](@ref GLFW_COCOA_CHDIR_RESOURCES_hint).
+ *)
+const
+  GLFW_COCOA_CHDIR_RESOURCES = $00051001;
+
+(*! @brief macOS specific init hint.
+ *
+ *  macOS specific [init hint](@ref GLFW_COCOA_MENUBAR_hint).
+ *)
+const 
+  GLFW_COCOA_MENUBAR = 00051002;
+(*! *)
 
   GLFW_DONT_CARE = -1;
 
@@ -1011,6 +1283,39 @@ procedure glfwGetVersion(major, minor, rev: PInteger);
   Added in version 3.0. }
 function glfwGetVersionString(): PAnsiChar;
   cdecl external GLFW3_LIB name _PU + 'glfwGetVersionString';
+  
+(*! @brief Returns and clears the last error for the calling thread.
+ *
+ *  This function returns and clears the [error code](@ref errors) of the last
+ *  error that occurred on the calling thread, and optionally a UTF-8 encoded
+ *  human-readable description of it.  If no error has occurred since the last
+ *  call, it returns @ref GLFW_NO_ERROR (zero) and the description pointer is
+ *  set to `NULL`.
+ *
+ *  @param[in] description Where to store the error description pointer, or `NULL`.
+ *  @return The last error code for the calling thread, or @ref GLFW_NO_ERROR
+ *  (zero).
+ *
+ *  @errors None.
+ *
+ *  @pointer_lifetime The returned string is allocated and freed by GLFW.  You
+ *  should not free it yourself.  It is guaranteed to be valid only until the
+ *  next error occurs or the library is terminated.
+ *
+ *  @remark This function may be called before @ref glfwInit.
+ *
+ *  @thread_safety This function may be called from any thread.
+ *
+ *  @sa @ref error_handling
+ *  @sa @ref glfwSetErrorCallback
+ *
+ *  @since Added in version 3.3.
+ *
+ *  @ingroup init
+ *)
+function glfwGetError(description: PPAnsiChar): integer;
+  cdecl external GLFW3_LIB name _PU + 'glfwGetError';  
+  
 
 { Sets the error callback.
 
@@ -1114,6 +1419,42 @@ function glfwGetPrimaryMonitor(): PGLFWmonitor;
   Added in version 3.0. }
 procedure glfwGetMonitorPos(monitor: PGLFWmonitor; xpos, ypos: PInteger);
   cdecl external GLFW3_LIB name _PU + 'glfwGetMonitorPos';
+
+
+{*! @brief Retrieves the work area of the monitor.
+ *
+ *  This function returns the position, in screen coordinates, of the upper-left
+ *  corner of the work area of the specified monitor along with the work area
+ *  size in screen coordinates. The work area is defined as the area of the
+ *  monitor not occluded by the operating system task bar where present. If no
+ *  task bar exists then the work area is the monitor resolution in screen
+ *  coordinates.
+ *
+ *  Any or all of the position and size arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` position and size arguments will be set to zero.
+ *
+ *  @param[in] monitor The monitor to query.
+ *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
+ *  @param[out] ypos Where to store the monitor y-coordinate, or `NULL`.
+ *  @param[out] width Where to store the monitor width, or `NULL`.
+ *  @param[out] height Where to store the monitor height, or `NULL`.
+ *
+ *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+ *  GLFW_PLATFORM_ERROR.
+ *
+ *  @thread_safety This function must only be called from the main thread.
+ *
+ *  @sa @ref monitor_workarea
+ *
+ *  @since Added in version 3.3.
+ *
+ *  @ingroup monitor
+ *}
+ 
+procedure glfwGetMonitorWorkarea(monitor: PGLFWmonitor; xpos, ypos, width, height: PInteger);
+  cdecl external GLFW3_LIB name _PU + 'glfwGetMonitorWorkarea';
+
+
 
 { Returns the physical size of the monitor.
 

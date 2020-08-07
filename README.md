@@ -1,22 +1,32 @@
 # GLFW3 Language Bindings for Delphi/FPC
 
-This repository contains Delphi/FPC language bindings and binaries for [GLFW3](http://www.glfw.org/) version 3.3.2.
+This repository contains Delphi/FPC language bindings and binaries 
+for [GLFW3](http://www.glfw.org/) version 3.3.2.
 
-It supports Windows (32-bit and 64-bit) and macOS (32-bit).
+It supports Windows (32-bit and 64-bit) and macOS (64-bit).
 
 ## Source Code
 
-The only unit you need is `Neslib.Glfw3`, which contains the header translations for GLFW3.
+The only unit you need is `Neslib.Glfw3`, 
+which contains the header translations for GLFW3.
 
-## Example
+## Examples
 
-The `Example` directory contains a minimal example of using GLFW and OpenGL to show a spinning triangle.
+The `Example` directory contains examples of using GLFW and OpenGL.
 
+Spinning triangle
 <img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/example.png">
+
+Gears
+<img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/gears.png">
+
+HeightMap
+<img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/heightmap.png">
 
 ## Deployment
 
-This repository contains pre-compiled dynamic libraries for Windows and macOS. These can be found in the `Libraries` folder.
+This repository contains pre-compiled dynamic libraries for Windows and macOS. 
+These can be found in the `Libraries` folder.
 
 To deploy your GLFW3 application:
 * For Windows: place the `glfw3_32.dll` (32-bit) or `glfw3_64.dll` (64-bit) file in the same directory as the executable.
@@ -30,15 +40,23 @@ Alternatively, you can [read the documentation on-line](https://neslib.github.io
 
 ## Updating the Dynamic Libraries
 
-If you want to use a newer version of the dynamic libraries than those provided in this repository, then follow these steps:
+If you want to use a newer version of the dynamic libraries 
+than those provided in this repository, then follow these steps:
 
 ### For Windows
 
-It is easiest to download the pre-compiled binaries from http://www.glfw.org/download.html. You can download both the 32-bit and 64-bit libraries here.
+It is easiest to download the pre-compiled binaries 
+from http://www.glfw.org/download.html. 
+You can download both the 32-bit and 64-bit libraries here.
 
-The downloaded zip file will contain multiple DLLs in different folders such as `lib-mingw` and `lib-vc2015`. You should use the DLL from the `lib-mingw` folder, since that one doesn't have any dependencies on a specific Visual Studio Runtime.
+The downloaded zip file will contain multiple DLLs in different folders 
+such as `lib-mingw` and `lib-vc2015`. You should use the DLL 
+from the `lib-mingw` folder, since that one doesn't have any dependencies 
+on a specific Visual Studio Runtime.
 
-Note that the download for the 32-bit DLLs may also contain a `lib-mingw-w64` folder. However, that folder does *not* contain a 64-bit DLL. You should download the 64-bit binaries for that.
+Note that the download for the 32-bit DLLs may also contain 
+a `lib-mingw-w64` folder. However, that folder does *not* contain 
+a 64-bit DLL. You should download the 64-bit binaries for that.
 
 Rename the DLL to `glfw3_32.dll` or `glfw3_64.dll`, depending on platform.
 
