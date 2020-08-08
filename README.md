@@ -12,15 +12,20 @@ which contains the header translations for GLFW3.
 
 ## Examples
 
-The `Example` directory contains examples of using GLFW and OpenGL.
+The `Example` directory contains examples of using GLFW and OpenGL with GLAD loader.
 
-Spinning triangle
+#### Spinning triangle
+
 <img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/example.png">
 
-Gears
+#### Gears
+
+Build - `fpc -B -dUSE_GLAD gears.pas`
+
 <img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/gears.png">
 
-HeightMap
+#### HeightMap
+
 <img src="https://github.com/JulStrat/DelphiGlfw/blob/v3.3.2/Example/FPC/heightmap.png">
 
 ## Deployment
